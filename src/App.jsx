@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Search from "./components/search";
 import Spinner from "./components/Spinner";
+import MovieCard from "./components/MovieCard";
 
 //Sets the base URL of the TMBD API we are calling from for our application.//
 const API_BASE_URL = " https://api.themoviedb.org/3";
@@ -54,16 +55,19 @@ const App = () => {
         setMovieList([]);
         return;
       }
-
+      //Sets the movieList state to data.results OR an empty array if the IF statement above clears.//
       setMovieList(data.results || []);
     } catch (error) {
+      //When catching an error, flag the console with an error message.//
       console.error(`Error fetching movies: ${error}`);
       setErrorMessage("Error fetching movies. Please try again later.");
     } finally {
+      //Once all of the above statements clear and are passed then set the isLoading state to false.//
       setIsLoading(false);
     }
   };
 
+  //useEffect Hook to synchronize our component with the external TMBD API.//
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -91,7 +95,7 @@ const App = () => {
           ) : (
             <ul>
               {movieList.map((movie) => (
-                <p className='text-white'>{movie.title}</p>
+                <MovieCard key={movie.id} movie={movie} />
               ))}
             </ul>
           )}
