@@ -1,8 +1,10 @@
 import React from "react";
 
+// Creates the MovieCard constant, with properties being deconstructed in the arrow function.
 const MovieCard = ({
   movie: { title, vote_average, poster_path, release_date, original_language },
 }) => {
+  // Return a div with className movie-card, which includes an image and alt text, utilising props from the main component.
   return (
     <div className='movie-card'>
       <img
@@ -13,10 +15,10 @@ const MovieCard = ({
         }
         alt={title}
       />
-
+      {/* Returns the movie title */}
       <div>
         <h3>{title}</h3>
-
+        {/* Returns several divs, utilising different deconstructed props to showcase ratings, languages, and release dates */}
         <div className='content'>
           <div className='rating'>
             <img src='star.svg' alt='Star Icon' />
